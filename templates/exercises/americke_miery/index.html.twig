@@ -1,0 +1,45 @@
+{# templates/exercises/americke_miery/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Prevod amerických mier{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Prevod amerických mier</h1>
+
+        <form method="post" class="mb-4">
+            <div class="form-group">
+                <label for="centimeters">Zadajte hodnotu v centimetroch:</label>
+                <input type="number" 
+                       step="0.01" 
+                       class="form-control" 
+                       id="centimeters" 
+                       name="centimeters" 
+                       required>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Previesť</button>
+        </form>
+
+        {% if result is not null %}
+            <div class="results">
+                <h2>Výsledky prevodu:</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Jednotka</th>
+                            <th>Hodnota</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for code, name in measures %}
+                            <tr>
+                                <td>{{ name|capitalize }}</td>
+                                <td>{{ result[code]|number_format(4) }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
